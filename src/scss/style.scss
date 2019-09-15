@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:300,400,500&display=swap');
+
+$white: #ffffff;
+$black: #000000;
+
+$bodyBg: #151515;
+$mainFont: 'Bai Jamjuree', sans-serif;
+$textColor: #aaaaaa;
+
+$headerBorderColor: #333333;
+
+html, body {
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	font-size: 13px;
+	color: $textColor;
+	background-color: $bodyBg;
+	font-family: $mainFont;
+}
+#react-star-wars {
+	height: 100%;
+}
+.midAligned {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.container {
+	margin: 0 auto;
+	@media only screen and (min-width: 768px) {
+		width: 720px;
+	}
+	@media only screen and (min-width: 992px) {
+		width: 940px;
+	}
+	@media only screen and (min-width: 1200px) {
+		width: 1140px;
+	}
+	@media only screen and (min-width: 1600px) {
+		width: 1440px;
+	}
+}
+.fullWidth {
+	float: left;
+	width: 100%;
+}
+.textCenter {
+	text-align: center;
+}
+.legibility {
+	/* stylelint-disable-next-line no-descending-specificity */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+.relativePosition {
+	position: relative;
+}
+header, section, footer {
+	@extend .fullWidth, .legibility;
+}
+header {
+	height: 65px;
+	@extend .midAligned;
+	border-bottom: 1px solid $headerBorderColor;
+	img {
+		max-width: 300px;
+	}
+}
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 10px 0px;
+}
+.errorBlock {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	background: rgba(165, 5, 5, 1);
+	z-index: 1;
+	p {
+		margin: 0px;
+		padding: 15px 0px;
+		color: $white;
+		@extend .textCenter;
+	}
+}

@@ -1,0 +1,104 @@
+@import './style.scss';
+
+.loginBlock {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.loginBlockMain {
+		width: 95%;
+		max-width: 700px;
+		margin: 0 auto;
+		background: $black;
+		border-radius: 5px;
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		z-index: 2;
+		h3 {
+			text-align: center;
+			font-size: 2.05em;
+			font-weight: 300;
+			position: relative;
+			&:after {
+				background: rgba(255, 255, 255, 0.25);
+				width: 50px;
+				height: 2px;
+				content: "";
+				bottom: -20px;
+				position: absolute;
+				left: calc( 50% - 25px );
+			}
+		}
+		.form {
+			label, input, button {
+				float: left;
+				width: 90%;
+				margin: 0px 5%;
+				font-size: 1.25em;
+				font-family: $mainFont;
+			}
+			.fullWidth {
+				padding: 15px 0px;
+			}
+			> input {
+				display: none;
+			}
+			input {
+				margin-top: 7px;
+				padding: 8px;
+				border-radius: 0px;
+				border: 0px;
+				outline: none;
+				background: $white;
+				line-height: 24px;
+			}
+			button {
+				line-height: 36px;
+				max-width: 250px;
+				padding: 0;
+				cursor: pointer;
+				background: transparent;
+				color: $white;
+				border: 1px solid $white;
+				position: relative;
+				outline: none;
+				span {
+					position: absolute;
+					top: 0;
+					left: 50%;
+					right: 50%;
+					bottom: 0;
+					z-index: -1;
+					background-color: $white;
+					-webkit-transition-property: left right;
+					transition-property: left right;
+					-webkit-transition-duration: 0.5s;
+					transition-duration: 0.5s;
+					-webkit-transition-timing-function: ease-out;
+					transition-timing-function: ease-out;
+					content: "";
+				}
+				&:hover {
+					color: $black;
+					span {
+						left: 0;
+						right: 0;
+					}
+				}
+			}
+		}
+	}
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100vw;
+		height: 100vh;
+		z-index: 1;
+		background: $black;
+		opacity: 0;
+	}
+}
