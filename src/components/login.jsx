@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from './loading.jsx';
 import Error from './error.jsx';
 
 import { connect } from 'react-redux';
@@ -30,42 +31,54 @@ class LoginBlock extends Component {
 		});
 	}
 
-	searchUserDetails = (e) => {
+	componentDidMount() {
+		if(localStorage.getItem('isLoggedIn') && localStorage.getItem('isLoggedIn') === 'true') {
+			this.props.history.push('/dashboard');
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+
+		let filteredObj = nextProps.people.filter(item => item.name.indexOf(this.state.username) > -1);
+		let userObj = filteredObj.filter((item) => item.name === this.state.username);
+		this.setState({
+			userDetails: userObj
+		}, () => {
+			if(this.state.userDetails.length > 0 && this.state.pwd === this.state.userDetails[0].birth_year) {
+
+				localStorage.setItem('isLoggedIn', true);
+				this.props.history.push('/dashboard');
+			} else {
+				localStorage.setItem('isLoggedIn', false);
+				this.setState({
+					error: 'Entered Password Is Wrong.'
+				});
+			}
+		});
+		if(this.state.userDetails.length == 0) {
+			localStorage.setItem('isLoggedIn', false);
+			this.setState({
+				error: 'No Such Username Exists'
+			});
+		} else {
+			this.setState({
+				error: ''
+			});
+		}
+	}
+
+	searchUserDetails(e) {
 		if(this.state.username !== '') {
 			this.props.loadPersonData(this.state.username.split(" ")[0]);
-			
-			if(this.props.people !== undefined) {
-				let filteredObj = this.props.people.filter(item => item.name.indexOf(this.state.username) > -1);
-				let userObj = filteredObj.filter((item) => item.name === this.state.username);
-				this.setState({
-					userDetails: userObj
-				}, () => {
-					console.log("this.state.userDetails: ", this.state.userDetails);
-				});
-				if(this.state.userDetails.length == 0) {
-					this.setState({
-						error: 'No Such Username Exists'
-					});
-				} else {
-					this.setState({
-						error: ''
-					});
-				}
-				if(this.state.userDetails.length > 0 && this.state.pwd === this.state.userDetails[0].birth_year) {
-					console.log("Logged In");
-					this.props.history.push('/dashboard');
-				} else {
-					console.log("Not Logged In");
-					this.setState({
-						error: 'Entered Password Is Wrong.'
-					});
-				}
-			}
+		} else {
+			localStorage.setItem('isLoggedIn', false);
+			this.setState({
+				error: 'The Username cannot be blank.'
+			});
 		}
 	}
 
 	render() {
-		console.log('Login: ', this.props);
 		return (
 			<section className="loginBlock">
 				<div className="loginBlockMain relativePosition">
@@ -90,6 +103,9 @@ class LoginBlock extends Component {
 						</div>
 					</div>
 				</div>
+				{
+					this.state.userDetails && this.state.userDetails.length === 0 && this.state.error.length === 0 ? (<div className="loading"><Loading /></div>) : ''
+				}
 			</section>
 		)
 	}

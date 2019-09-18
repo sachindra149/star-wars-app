@@ -1,5 +1,8 @@
 @import './style.scss';
-
+body {
+	background: url('https://wallpaperplay.com/walls/full/a/0/5/124143.jpg') no-repeat center center;
+	background-attachment: fixed;
+}
 .loginBlock {
 	position: absolute;
 	top: 0px;
@@ -12,7 +15,7 @@
 		width: 95%;
 		max-width: 700px;
 		margin: 0 auto;
-		background: $black;
+		background: rgba(0,0,0,0.75);
 		border-radius: 5px;
 		border: 1px solid rgba(255, 255, 255, 0.25);
 		z-index: 2;
@@ -29,6 +32,10 @@
 				bottom: -20px;
 				position: absolute;
 				left: calc( 50% - 25px );
+			}
+			&::selection {
+				background: none;
+				color: $white;
 			}
 		}
 		.form {
@@ -53,6 +60,12 @@
 				outline: none;
 				background: $white;
 				line-height: 24px;
+			}
+			label {
+				&::selection {
+					background: none;
+					color: $white;
+				}
 			}
 			button {
 				line-height: 36px;
@@ -79,6 +92,10 @@
 					-webkit-transition-timing-function: ease-out;
 					transition-timing-function: ease-out;
 					content: "";
+				}
+				&::selection {
+					background: none;
+					color: $black;
 				}
 				&:hover {
 					color: $black;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import { Provider } from 'react-redux';
-import store from './store.jsx';
+import store from './reducers/store.jsx';
 
 import Header from './components/header.jsx';
 import AppComponents from './components/components.jsx';
@@ -13,8 +13,10 @@ class StarWars extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header />
-                <AppComponents />
+                <div className="fullWidth topBlock">
+                    <Header />
+                    <AppComponents />
+                </div>
                 <Footer />
             </React.Fragment>
         )

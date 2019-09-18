@@ -1,26 +1,30 @@
 const SEARCH_PERSON = 'SEARCH_PERSON';
 const GET_PLANETS_LIST = 'GET_PLANETS_LIST';
-const SHOW_LOADER = 'SHOW_LOADER';
-const HIDE_LOADER = 'HIDE_LOADER';
+const GET_PLANETS_DETAILS = 'GET_PLANETS_DETAILS';
 
+import store from '../reducers/store.jsx';
 import axios from 'axios';
 
 export function getPerson(id) {
-	return(dispatch) => {
-		return axios.get('https://swapi.co/api/people/?search='+id)
-			.then((response) => {
-				dispatch(searchPerson(response));
-			})
-	}
+	console.log("id: ", id);
+	return axios.get('https://swapi.co/api/people/?search='+id)
+		.then((response) => {
+			store.dispatch(searchPerson(response));
+		})
 }
 
 export function getPlanets() {
-	return(dispatch) => {
-		return axios.get('https://swapi.co/api/planets')
-			.then((response) => {
-				dispatch(getPlanetsList(response))
-			})
-	}
+	return axios.get('https://swapi.co/api/planets')
+		.then((response) => {
+			store.dispatch(getPlanetsList(response))
+		})
+}
+
+export function getPlanetsDetails(name) {
+	return axios.get('https://swapi.co/api/planets/?search='+name)
+		.then((response) => {
+			store.dispatch(getPlanetsDetailedDesc(response))
+		})
 }
 
 export function showLoader() {
@@ -36,6 +40,7 @@ export function hideLoader() {
 }
 
 export function searchPerson(data) {
+	console.log("data: ", data);
 	return {
 		type: 'SEARCH_PERSON',
 		data: data
@@ -43,9 +48,15 @@ export function searchPerson(data) {
 }
 
 export function getPlanetsList(data) {
-	console.log("data: ", data);
 	return {
 		type: 'GET_PLANETS_LIST',
+		data: data.data.results
+	}
+}
+
+export function getPlanetsDetailedDesc(data) {
+	return {
+		type: 'GET_PLANETS_DETAILS',
 		data: data.data.results
 	}
 }

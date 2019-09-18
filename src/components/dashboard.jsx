@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
-import { getPlanets } from '../actions/index.jsx';
+import Loading from './loading.jsx';
+import '../scss/planets.scss';
 
+import { getPlanets } from '../actions/index.jsx';
 import { connect } from 'react-redux';
 
 class AppDashboard extends Component {
 	
+	constructor(props) {
+		super(props);
+		this.state = {
+			planets: ''
+		}
+	}
+
 	componentDidMount() {
-		this.props.getListOfPlanets();
+		if(localStorage.getItem("isLoggedIn")) {
+			this.props.getListOfPlanets();
+		} else {
+			this.props.history.push('/');
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			planets: nextProps.planets.data
+		});
+	}
+
+	logout() {
+		localStorage.setItem('isLoggedIn', false);
+		this.props.history.push('/');
 	}
 
 	render() {
-		console.log("this.props1: ", this.props);
+		let population = this.state.planets && this.state.planets.length > 0 ? this.state.planets.map((item) => parseInt(item.population)) : '';
+		let populationArr = population && population.length > 0 ? population.filter( (item) => !isNaN(parseInt(item)) ) : '';
+		let total = populationArr.length > 0 ? populationArr.reduce((a, b) => a+b) : '';
+		
 		return (
 			<section>
-				<div className="container">
-					<ul>
+				<div className="container dashboard">
+					<ul className="textCenter">
 						{
-							// this.props.planets && this.props.planets.data.results && this.props.planets.data.results.length > 0 ? (<li>{ this.props.planets.data.results }</li>) : ('')
+							this.state.planets.length > 0 ? (this.state.planets.map((item) => {
+								let blockHeight = (item.population/total)*50000 < 200 ? 200 : (item.population/total)*50000;
+								let styleObj = { "height" : blockHeight + 'px' };
+								
+								return <li key={ item.name } className="planetNames"><a href={`/planet-details-${item.name}`}>
+									<div className="planetDetailsBanner" style={ styleObj }>&nbsp;</div>{ item.name }<span>Population: { item.population }</span>
+								</a></li>;
+							})) : (<li className="loading"><Loading /></li>)
 						}
 					</ul>
 				</div>
+				<a href="/" onClick={ () => this.logout() } className="logout">Logout</a>
 			</section>
 		)
 	}

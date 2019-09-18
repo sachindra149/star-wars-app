@@ -5,7 +5,7 @@ class NotFound extends Component {
 		return (
 			<div className="container">
 				<ul>
-					<li>Testing11 Dashboard</li>
+					<li>The page/route you're looking for cannot be found.</li>
 				</ul>
 			</div>
 		)

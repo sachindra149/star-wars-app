@@ -1,7 +1,6 @@
 let defaultState = {}
 
-const starWarAppReducer = (state = defaultState, action) => {
-	console.log("action: ", action);
+const starWarAppReducer = (state = [], action) => {
 	switch(action.type) {
 		
 		case 'SEARCH_PERSON':
@@ -10,22 +9,16 @@ const starWarAppReducer = (state = defaultState, action) => {
 				data: action.data.data.results
 			}
 
-		case 'SHOW_LOADER':
-			return {
-				...state,
-				data: action.payload
-			}
-
-		case 'HIDE_LOADER':
-			return {
-				...state,
-				data: action.payload
-			}
-
 		case 'GET_PLANETS_LIST':
 			return {
 				...state,
-				data: action.payload
+				data: action.data
+			}
+
+		case 'GET_PLANETS_DETAILS':
+			return {
+				...state,
+				data: action.data
 			}
 		
 		default:

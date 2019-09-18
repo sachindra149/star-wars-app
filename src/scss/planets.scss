@@ -1,0 +1,229 @@
+.topBlock {
+	min-height: 100%;
+    height: auto !important;
+    padding-bottom: 40px;
+	.dashboard {
+		padding: 50px 0px;
+		@media only screen and (max-width: 767px) {
+			padding: 20px 0px 0px 0px;
+		}
+		ul {
+			padding: 0px;
+			margin: 0px;
+			-moz-column-count: 3;
+			-webkit-column-count: 3;
+			column-count: 3;
+			@media only screen and (max-width: 767px) {
+				-moz-column-count: 1;
+				-webkit-column-count: 1;
+				column-count: 1;
+				padding: 0px 15px;
+			}
+			li {
+				&.loading {
+					list-style: none;
+				}
+				&.planetNames {
+					display: inline-block;
+					background: rgba(255, 255, 255, 0.1);
+					margin: 0 0 1.5em;
+					width: 100%;
+					box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.18);
+					
+					@media only screen and (max-width: 768px) {
+						min-width: 65%;
+						margin: 0px 0px 2.5% 0px;
+					}
+					a {
+						color: #dad8d8;
+						text-decoration: none;
+						display: block;
+						padding: 15px;
+						font-size: 1.25em;
+						position: relative;
+						&:before, &:after {
+							content: "";
+							width: 0;
+							height: 1px;
+							position: absolute;
+							transition: all 0.4s linear;
+							background: rgba(255, 255, 255, 0.2);
+							transition-delay: 0.2s;
+						}
+						&::selection {
+							background: none;
+							color: #ffffff;
+						}
+						&:before {
+							right: 0;
+							top: 0;
+						}
+						&:after {
+							left: 0;
+							bottom: 0;
+						}
+						&:hover {
+							&:after, &:before {
+								width: 100%;
+							}
+							span {
+								&:after, &:before {
+									height: 100%;
+								}
+							}
+						}
+						span {
+							display: block;
+							font-size: 0.9rem;
+							color: #aaaaaa;
+							padding-top: 5px;
+							&:after, &:before {
+								content: "";
+								width: 1px;
+								height: 0;
+								position: absolute;
+								transition: all 0.4s linear;
+								background: rgba(255, 255, 255, 0.2);
+							}
+							&:before {
+								left: 0;
+								top: 0;
+							}
+							&:after {
+								right: 0;
+								bottom: 0;
+							}
+							&::selection {
+								background: none;
+								color: #ffffff;
+							}
+						}
+						&:hover, &:focus {
+							color: #aaaaaa;
+						}
+					}
+					&:hover {
+						background: rgba(255, 255, 255, 0.05);
+					}
+					.planetDetailsBanner {
+						float: left;
+						width: 100%;
+						margin-bottom: 20px;
+						background-position: right bottom !important;
+						background-size: cover !important;
+						min-height: 250px;
+						max-height: 500px;
+					}
+					&:nth-child(5n+1) {
+						.planetDetailsBanner {
+							background: url('https://lumiere-a.akamaihd.net/v1/images/1-alderaan-bio-1_copy_d2ef86c5.jpeg') no-repeat;
+						}
+					}
+					&:nth-child(5n+2) {
+						.planetDetailsBanner {
+							background: url('https://i.imgur.com/t7gmCIu.png') no-repeat;
+						}
+					}
+					&:nth-child(5n+3) {
+						.planetDetailsBanner {
+							background: url('https://vignette.wikia.nocookie.net/starwars/images/0/0d/NalHutta-HFZ.png') no-repeat;
+						}
+					}
+					&:nth-child(5n+4) {
+						.planetDetailsBanner {
+							background: url('https://starwarsblog.starwars.com/wp-content/uploads/2018/10/mustafar-tall.jpg') no-repeat;
+						}
+					}
+					&:nth-child(5n) {
+						.planetDetailsBanner {
+							background: url('http://ongur.com/wp-content/uploads/2014/08/Star-Wars-Planets-Movie-Wallpaper-9374.jpg') no-repeat;
+						}
+					}
+				}
+			}
+		}
+	}
+	.planetDetails {
+		.planetDetailsBanner {
+			float: left;
+			width: 100%;
+			background: url(https://lumiere-a.akamaihd.net/v1/images/open-uri20150610-21458-293o0w_6d6b31d2.jpeg) no-repeat center top #161616;
+			background-size: cover;
+			height: 350px;
+			@media only screen and (max-width: 767px) {
+				height: 200px;
+			}
+			+ .fullWidth {
+				padding: 0px 15px;
+			}
+		}
+	}
+	.planetHeading {
+		float: left;
+		width: 100%;
+		padding: 5% 0px 0px 0px;
+		a {
+			color: #aaaaaa;
+			text-decoration: none;
+			&:hover, &:focus {
+				color: #ffffff;
+				text-decoration: none;
+			}
+		}
+	}
+	.planetContent {
+		float: left;
+		width: 100%;
+		padding: 2.5% 0px 0px 0px;
+		thead {
+			th {
+				background: rgba(255,255,255,0.1);
+				font-weight: normal;
+			}
+		}
+		td, th {
+			border: 1px solid rgba(255,255,255,0.1);
+			padding: 20px;
+			font-size: 1.15em;
+			b {
+				font-weight: normal;
+				color: #ffffff;
+				text-transform: capitalize;
+			}
+			@media only screen and (max-width: 767px) {
+				display: inline-table;
+				width: 100%;
+			}
+		}
+		tr {
+			&:nth-child(odd) {
+				background: rgba(0,0,0,0.35);
+				@media only screen and (max-width: 767px) {
+					background: none;
+				}
+			}
+		}
+	}
+}
+.logout {
+	position: fixed;
+	right: 0px;
+	top: 50%;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px 0px 0px 4px;
+	color: #ffffff;
+	text-decoration: none;
+	line-height: 36px;
+    width: 110px;
+	text-transform: uppercase;
+	transition: all 0.35s ease-out 0s;
+	border: 1px solid transparent;
+	border-right: 0px;
+	text-align: center;
+	&:hover, &:focus {
+		color: #ffffff;
+		background: #000000;
+		border-color: rgba(255, 255, 255, 0.3);
+		width: 130px;
+	}
+}
